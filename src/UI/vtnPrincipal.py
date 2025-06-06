@@ -116,4 +116,3 @@ class Ui_vtnPrincipal(object):
         self.cbsexo.setItemText(1, QCoreApplication.translate("vtnPrincipal", u"Femenino", None))
 
     # retranslateUi
-
