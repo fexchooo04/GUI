@@ -15,6 +15,8 @@ class PersonaServicio(QMainWindow):
         print(self.ui.txtNombre.text())
         print(self.ui.txtApellido.text())
         print(self.ui.txtCedula.text())
+        print(self.ui.txtemail.text())
+        print(self.ui.cbsexo.currentText())
         print('Se hizo clic en el boton guardar')
 
     def borrar(self):
