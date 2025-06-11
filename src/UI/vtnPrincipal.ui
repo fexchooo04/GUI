@@ -97,7 +97,7 @@
       <string>Cédula:</string>
      </property>
     </widget>
-    <widget class="QLabel" name="lbsexo">
+    <widget class="QLabel" name="lbSexo">
      <property name="font">
       <font>
        <pointsize>14</pointsize>
@@ -108,7 +108,7 @@
       <string>Sexo:</string>
      </property>
     </widget>
-    <widget class="QLabel" name="lbCedula_3">
+    <widget class="QLabel" name="lbEmail">
      <property name="font">
       <font>
        <pointsize>14</pointsize>
@@ -147,7 +147,12 @@
       <number>10</number>
      </property>
     </widget>
-    <widget class="QComboBox" name="cbsexo">
+    <widget class="QComboBox" name="cbSexo">
+     <item>
+      <property name="text">
+       <string>Seleccionar</string>
+      </property>
+     </item>
      <item>
       <property name="text">
        <string>Masculino</string>
@@ -159,7 +164,7 @@
       </property>
      </item>
     </widget>
-    <widget class="QLineEdit" name="txtemail">
+    <widget class="QLineEdit" name="txtEmail">
      <property name="maxLength">
       <number>100</number>
      </property>
