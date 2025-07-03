@@ -6,7 +6,7 @@ class Conexion:
     """
     Clase que permite abrir conexion a la BBDD y abrir cursor.
     """
-    _SERVIDOR = '10.4.75.18'
+    _SERVIDOR = '10.4.97.50'
     # _SERVIDOR = '10.4.74.77'
     # _SERVIDOR = '127.0.0.1'
     _BBDD = 'POO_MAT'

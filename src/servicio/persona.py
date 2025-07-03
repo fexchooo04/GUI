@@ -1,6 +1,7 @@
 from PySide6.QtGui import QIntValidator
 from PySide6.QtWidgets import QMainWindow, QMessageBox
 from src.UI.vtnPrincipal import Ui_vtnPrincipal
+from src.datos.personaDao import PersonaDao
 from src.dominio.persona import Persona
 
 
@@ -34,18 +35,14 @@ class PersonaServicio(QMainWindow):
         self.ui.statusbar.showMessage('Se guardó la información', 3000)
 
         # Mostrar datos por consola
-        #print(self.ui.txtNombre.text())
-        #print(self.ui.txtApellido.text())
-        #print(self.ui.txtCedula.text())
-        #print(self.ui.txtEmail.text())
-        #print(self.ui.cbSexo.currentText())
-        #print('Se hizo clic en el botón guardar')
+
         persona = Persona(nombre=self.ui.txtNombre.text(),
                           apellido=self.ui.txtApellido.text(),
                           cedula=self.ui.txtCedula.text(),
                           email=self.ui.txtEmail.text(),
-                          sexo=self.ui.cbSexo.currentText(),)
+                          sexo=self.ui.cbSexo.currentText()[0])
         print(persona)
+        PersonaDao.insertar_persona(persona)
 
         # Limpiar campos sin mostrar mensaje de borrar
         self.borrar()
