@@ -32,7 +32,7 @@ class PersonaServicio(QMainWindow):
             return
 
         # Mostrar mensaje en la barra de estado
-        self.ui.statusbar.showMessage('Se guardó la información', 3000)
+        #self.ui.statusbar.showMessage('Se guardó la información', 3000)
 
         # Mostrar datos por consola
 
@@ -42,10 +42,14 @@ class PersonaServicio(QMainWindow):
                           email=self.ui.txtEmail.text(),
                           sexo=self.ui.cbSexo.currentText()[0])
         print(persona)
-        PersonaDao.insertar_persona(persona)
 
-        # Limpiar campos sin mostrar mensaje de borrar
-        self.borrar()
+        if PersonaDao.insertar_persona(persona)== -1:
+            QMessageBox.critical(self, 'Error', 'No se pudo guardar la persona.')
+
+        else:
+            self.ui.statusbar.showMessage('Se guardó la información', 3000)
+            # Limpiar campos sin mostrar mensaje de borrar
+            self.borrar()
 
     def accion_borrar(self):
         self.borrar(True)
