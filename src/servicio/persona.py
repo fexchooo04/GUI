@@ -10,15 +10,13 @@ class PersonaServicio(QMainWindow):
         super(PersonaServicio, self).__init__()
         self.ui = Ui_vtnPrincipal()
         self.ui.setupUi(self)
-
-        # Conectamos los botones con los métodos correspondientes
-        self.ui.btnGuardar.clicked.connect(self.guardar)
-        self.ui.btnBorrar.clicked.connect(self.accion_borrar)
-
-        # Solo permite números en el campo de cédula
+        self.ui.btnNuevo.clicked.connect(self.nuevo)
+        self.ui.btnLimpiar.clicked.connect(self.accion_borrar)
+        self.ui.btnBuscarCedula.clicked.connect(self.buscar)
         self.ui.txtCedula.setValidator(QIntValidator())
+        self.ui.txtBuscarCedula.setValidator(QIntValidator())
 
-    def guardar(self):
+    def nuevo(self):
         if (self.ui.txtNombre.text() == "" or
             self.ui.txtApellido.text() == "" or
             self.ui.txtCedula.text() == "" or
@@ -49,12 +47,12 @@ class PersonaServicio(QMainWindow):
         else:
             self.ui.statusbar.showMessage('Se guardó la información', 3000)
             # Limpiar campos sin mostrar mensaje de borrar
-            self.borrar()
+            self.limpiar()
 
     def accion_borrar(self):
-        self.borrar(True)
+        self.limpiar(True)
 
-    def borrar(self, mostrar_mensaje=False):
+    def limpiar(self, mostrar_mensaje=False):
         self.ui.txtNombre.setText("")
         self.ui.txtApellido.setText("")
         self.ui.txtCedula.setText("")
@@ -63,3 +61,18 @@ class PersonaServicio(QMainWindow):
 
         if mostrar_mensaje:
             print('Se hizo clic en el botón borrar')
+
+
+
+    def buscar(self):
+        if len(self.ui.txtBuscarCedula.text()) != 10:
+            QMessageBox.warning(self, "Advertencia", "La cédula debe tener exactamente 10 dígitos.")
+        else:
+            persona = PersonaDao.seleccionar_persona(self.ui.txtBuscarCedula.text())
+            self.ui.txtNombre.setText(persona.nombre)
+            self.ui.txtApellido.setText(persona.apellido)
+            self.ui.txtCedula.setText(persona.cedula)
+            self.ui.txtEmail.setText(persona.email)
+
+
+
