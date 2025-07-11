@@ -6,12 +6,12 @@ class Conexion:
     """
     Clase que permite abrir conexion a la BBDD y abrir cursor.
     """
-    _SERVIDOR = '10.4.72.109'
+    _SERVIDOR = '10.4.14.29\\SQLUG5_2'
     # _SERVIDOR = '10.4.74.77'
     # _SERVIDOR = '127.0.0.1'
-    _BBDD = 'POO_MAT'
+    _BBDD = 'persona'
     _USUARIO = 'poo_mat'
-    _PASSWORD = '1234'
+    _PASSWORD = '123456789'
     _conexion = None
     _cursor = None
 
@@ -23,7 +23,7 @@ class Conexion:
         """
         if cls._conexion is None:
             try:
-                cls._conexion = bd.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' +
+                cls._conexion = bd.connect('DRIVER={ODBC Driver 18 for SQL Server};SERVER=' +
                                            cls._SERVIDOR + ';DATABASE=' + cls._BBDD + ';UID=' + cls._USUARIO + ';PWD=' + cls._PASSWORD
                                            + ';TrustServerCertificate=yes')
                 # log.debug(f'Conexión exitosa: {cls._conexion}')

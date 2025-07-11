@@ -3,51 +3,76 @@ from src.dominio.persona import Persona
 
 
 class PersonaDao:
-        _ERROR = -1
-        _INSERT = ("insert into Persona(nombre,apellido, cedula, sexo, email) "
-                  "Values (?,?,?,?,?)")
-        _SELECT = ("SELECT nombre, apellido, apellido, cedula, sexo, email FROM Persona "
-                   "where cedula = ?")
+    _ERROR = -1
+    _INSERT = ("insert into Persona(nombre, apellido, cedula, sexo, email) "
+               "VALUES (?,?,?,?,?)")
+    _SELECT = ("SELECT nombre, apellido, cedula, sexo, email FROM Persona "
+               "where cedula=?")
+    _UPDATE = ("update Persona set nombre=?, apellido=?, sexo=?, email=? "
+               "where cedula=?")
+    _DELETE = "delete from Persona where cedula=?"
 
+    @classmethod
+    def insertar_persona(cls, persona):
+        try:
+            with Conexion.obtenerCursor() as cursor:
+                datos = (persona.nombre, persona.apellido,
+                         persona.cedula, persona.sexo, persona.email,)
+                registros = cursor.execute(cls._INSERT, datos)
+                return registros.rowcount
+        except Exception as e:
+            print(f"Error al insertar persona: {e}")
+            cursor.rollback()
+            return cls._ERROR
 
-        @classmethod
-        def insertar_persona(cls, persona):
-            try:
-                with Conexion.obtenerCursor() as cursor:
-                    datos = (persona.nombre, persona.apellido,
-                             persona.cedula, persona.sexo, persona.email)
-                    registros = cursor.execute(cls._INSERT, datos)
-                    print('Ejecuto')
-                    return registros.rowcount
+    @classmethod
+    def seleccionar_persona(cls, cedula):
+        try:
+            with Conexion.obtenerCursor() as cursor:
+                datos = (cedula,)
+                registro = cursor.execute(cls._SELECT, datos).fetchone()
+                print(registro)
+                if registro[3] == 'M':
+                    sexo =  'Masculino'
+                else:
+                    sexo = 'Femenino'
+                persona = Persona(nombre=registro[0],
+                                  apellido=registro[1],
+                                  cedula=registro[2],
+                                  email=registro[4],
+                                  sexo=sexo)
+                return persona
+        except Exception as e:
+            print(f"Error al consultar persona: {e}")
+            return None
 
-            except Exception as e:
-                print(e)
-                cursor.close()
-                return cls._ERROR
+    @classmethod
+    def actualizar_persona(cls, persona):
+        try:
+            with Conexion.obtenerCursor() as cursor:
+                datos = (persona.nombre, persona.apellido,
+                         persona.sexo, persona.email, persona.cedula,)
+                registros = cursor.execute(cls._UPDATE, datos)
+                return registros.rowcount
+        except Exception as e:
+            print(f"Error al actualizar persona: {e}")
+            cursor.rollback()
+            return cls._ERROR
 
-
-        @classmethod
-        def seleccionar_persona(cls, cedula):
-            try:
-                with Conexion.obtenerCursor() as cursor:
-                    datos = (cedula,)
-                    registros = cursor.execute(cls._SELECT, datos)
-                    persona = Persona(nombre=registros.fetchone()[0],
-                                      apellido=registros.fetchone()[1],
-                                      cedula=registros.fetchone()[2],
-                                      sexo=registros.fetchone()[3],
-                                      email=registros.fetchone()[4])
-                    return persona
-
-
-
-            except Exception as e:
-                print(e)
-                cursor.rollback()
-                return cls._ERROR
+    @classmethod
+    def eliminar_persona(cls, cedula):
+        try:
+            with Conexion.obtenerCursor() as cursor:
+                datos = (cedula,)
+                registros = cursor.execute(cls._DELETE, datos)
+                return registros.rowcount
+        except Exception as e:
+            print(f"Error al eliminar a la persona: {e}")
+            cursor.rollback()
+            return cls._ERROR
 
 if __name__ == '__main__':
-    #p = Persona('Fernando', 'Briones', '1317740981', 'M', 'fexchob4@mail.com')
-    #r = PersonaDao.insertar_persona(p)
-    r= PersonaDao.seleccionar_persona('1317740981')
-    print (r)
+    p = Persona('Jose', 'Perez', '0123456789', 'M', 'lperez@mail.com')
+    # r = PersonaDao.insertar_persona(p)
+    r = PersonaDao.actualizar_persona(p)
+    print(r)
