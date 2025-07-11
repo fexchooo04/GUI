@@ -1,14 +1,88 @@
-from PySide6.QtWidgets import QMainWindow
+from PySide6.QtGui import QIntValidator
+from PySide6.QtWidgets import QMainWindow, QMessageBox
 
 from src.UI.vtnPrincipal import Ui_vtnPrincipal
+from src.datos.personaDao import PersonaDao
+from src.dominio.persona import Persona
 
 
 class PersonaServicio(QMainWindow):
     def __init__(self):
-        super(PersonaServicio, self). __init__()
+        super(PersonaServicio, self).__init__()
         self.ui = Ui_vtnPrincipal()
         self.ui.setupUi(self)
-        self.ui.btnGuardar.clicked.connect(self.guardar)
+        self.ui.btnNuevo.clicked.connect(self.nuevo)
+        self.ui.btnLimpiar.clicked.connect(self.limpiar)
+        self.ui.btnBuscarCedula.clicked.connect(self.buscar)
+        self.ui.btnActualizar.clicked.connect(self.actualizar)
+        self.ui.btnBorrarRegistro.clicked.connect(self.borrar_registro)
+        self.ui.txtCedula.setValidator(QIntValidator())
+        self.ui.txtBuscarCedula.setValidator(QIntValidator())
 
-    def guardar(self):
-        print('Se hizo clic en el boton guardar')
+    def nuevo (self):
+        if self.ui.txtNombre.text() == '' or self.ui.txtApellido.text() == ''\
+                or len(self.ui.txtCedula.text()) < 10 or self.ui.txtEmail.text() == ''\
+                or self.ui.cbSexo.currentText() == 'Seleccionar':
+            QMessageBox.warning(self, 'Advertencia', 'Ingrese los datos.')
+        else:
+            persona = Persona(nombre=self.ui.txtNombre.text(),
+                             apellido=self.ui.txtApellido.text(),
+                             cedula=self.ui.txtCedula.text(),
+                             email=self.ui.txtEmail.text(),
+                              sexo=self.ui.cbSexo.currentText()[0])
+            print(persona)
+            if PersonaDao.insertar_persona(persona) == -1:
+                QMessageBox.critical(self, 'Error', 'No se pudo guardar la persona.')
+            else:
+                self.ui.statusbar.showMessage('Se guardo la información', 3000)
+                self.limpiar()
+
+    def limpiar(self):
+        self.ui.txtNombre.setText("")
+        self.ui.txtApellido.setText("")
+        self.ui.txtCedula.setText("")
+        self.ui.txtEmail.setText("")
+        self.ui.cbSexo.setCurrentText("Seleccionar")
+
+
+    def buscar (self):
+        if len(self.ui.txtBuscarCedula.text()) < 10:
+            QMessageBox.warning(self, 'Advertencia', 'Ingrese la cedula a buscar.')
+        else:
+            persona = PersonaDao.seleccionar_persona(self.ui.txtBuscarCedula.text())
+            if persona:
+                self.ui.txtNombre.setText(persona.nombre)
+                self.ui.txtApellido.setText(persona.apellido)
+                self.ui.txtCedula.setText(persona.cedula)
+                self.ui.txtEmail.setText(persona.email)
+                self.ui.cbSexo.setCurrentText(persona.sexo)
+            else:
+                QMessageBox.information(self, 'Información', 'Cedula no encontrada.')
+
+    def actualizar (self):
+        if QMessageBox.question(self, 'Pregunta', 'Esta seguro de actualizar?.') ==  QMessageBox.Yes:
+            if self.ui.txtNombre.text() == '' or self.ui.txtApellido.text() == '' \
+                    or len(self.ui.txtCedula.text()) < 10 or self.ui.txtEmail.text() == '' \
+                    or self.ui.cbSexo.currentText() == 'Seleccionar':
+                QMessageBox.warning(self, 'Advertencia', 'Ingrese los datos.')
+            else:
+                persona = Persona(nombre=self.ui.txtNombre.text(),
+                                  apellido=self.ui.txtApellido.text(),
+                                  cedula=self.ui.txtCedula.text(),
+                                  email=self.ui.txtEmail.text(),
+                                  sexo=self.ui.cbSexo.currentText()[0])
+                print(persona)
+                if PersonaDao.actualizar_persona(persona) == -1:
+                    QMessageBox.critical(self, 'Error', 'No se pudo actualizar la persona.')
+                else:
+                    self.ui.statusbar.showMessage('Se actualizó la información', 3000)
+                    self.limpiar()
+
+    def borrar_registro (self):
+        if QMessageBox.question(self, 'Pregunta', 'Esta seguro de borrar el registro?.') ==  QMessageBox.Yes:
+            cedula = self.ui.txtCedula.text()
+            if PersonaDao.eliminar_persona(cedula) == -1:
+                QMessageBox.critical(self, 'Error', 'No se pudo borrar el regsitro de la persona.')
+            else:
+                self.ui.statusbar.showMessage('Se borro el registro.', 3000)
+                self.limpiar()

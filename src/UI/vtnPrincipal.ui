@@ -7,142 +7,249 @@
     <x>0</x>
     <y>0</y>
     <width>706</width>
-    <height>445</height>
+    <height>567</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Sistema de Gestion del Personal</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="lbNombre">
+   <widget class="QPushButton" name="btnNuevo">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>30</y>
-      <width>91</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>Nombre:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lbApellido">
-    <property name="geometry">
-     <rect>
-      <x>90</x>
-      <y>60</y>
-      <width>91</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>Apellido:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lbCedula">
-    <property name="geometry">
-     <rect>
-      <x>90</x>
-      <y>100</y>
-      <width>81</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>Cédula:</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="txtNombre">
-    <property name="geometry">
-     <rect>
-      <x>180</x>
-      <y>30</y>
-      <width>371</width>
-      <height>20</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="txtApellido">
-    <property name="geometry">
-     <rect>
-      <x>180</x>
-      <y>70</y>
-      <width>371</width>
-      <height>20</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="txtCedula">
-    <property name="geometry">
-     <rect>
-      <x>170</x>
-      <y>100</y>
-      <width>381</width>
-      <height>20</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btnGuardar">
-    <property name="geometry">
-     <rect>
-      <x>220</x>
-      <y>170</y>
-      <width>81</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>Guardar</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btnBorrar">
-    <property name="geometry">
-     <rect>
-      <x>360</x>
-      <y>170</y>
+      <x>160</x>
+      <y>320</y>
       <width>75</width>
-      <height>31</height>
+      <height>28</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <pointsize>11</pointsize>
-      <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
     <property name="text">
-     <string>Borrar</string>
+     <string>Nuevo</string>
     </property>
+   </widget>
+   <widget class="QPushButton" name="btnLimpiar">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>320</y>
+      <width>75</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Limpiar</string>
+    </property>
+   </widget>
+   <widget class="QSplitter" name="splitter">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>150</y>
+      <width>79</width>
+      <height>130</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Orientation::Vertical</enum>
+    </property>
+    <widget class="QLabel" name="lbNombre">
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Nombre:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lbApellido">
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Apellido:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lbCedula">
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Cédula:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lbSexo">
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Sexo:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lbEmail">
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>E-mail</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QSplitter" name="splitter_2">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>151</y>
+      <width>361</width>
+      <height>132</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Orientation::Vertical</enum>
+    </property>
+    <widget class="QLineEdit" name="txtNombre">
+     <property name="maxLength">
+      <number>50</number>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="txtApellido">
+     <property name="maxLength">
+      <number>50</number>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="txtCedula">
+     <property name="maxLength">
+      <number>10</number>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="cbSexo">
+     <item>
+      <property name="text">
+       <string>Seleccionar</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Masculino</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Femenino</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QLineEdit" name="txtEmail">
+     <property name="maxLength">
+      <number>100</number>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="btnBorrarRegistro">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>320</y>
+      <width>121</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Borrar Registro</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnActualizar">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>320</y>
+      <width>78</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Actualizar</string>
+    </property>
+   </widget>
+   <widget class="QSplitter" name="splitter_3">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>60</y>
+      <width>358</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Orientation::Horizontal</enum>
+    </property>
+    <widget class="QLabel" name="lbBuscarCedula">
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Buscar por Cedula:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="txtBuscarCedula">
+     <property name="maxLength">
+      <number>10</number>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnBuscarCedula">
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset theme="QIcon::ThemeIcon::EditFind"/>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -151,7 +258,7 @@
      <x>0</x>
      <y>0</y>
      <width>706</width>
-     <height>21</height>
+     <height>33</height>
     </rect>
    </property>
   </widget>
